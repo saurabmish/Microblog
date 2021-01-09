@@ -4,7 +4,7 @@ Full stack web development using Django framework
 
 ## Setup
 
-+ Navigate to the project's root directory
++ Navigate to an empty directory
 
 + Create a Python 3 virtual environment:
 
@@ -41,3 +41,9 @@ Full stack web development using Django framework
 + Go to the below URL on the browser to verify Django server:
 
   `http://127.0.0.1:8000`
+
++ Stop the web server `Ctrl+c`
+
++ Create application directory:
+
+  `python manage.py startapp app`
