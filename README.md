@@ -4,6 +4,8 @@ Full stack web development using Django framework
 
 ## Setup
 
+### Project
+
 + Navigate to an empty directory
 
 + Create a Python 3 virtual environment:
@@ -44,6 +46,16 @@ Full stack web development using Django framework
 
 + Stop the web server `Ctrl+c`
 
+### Application
+
 + Create application directory:
 
   `python manage.py startapp app`
+
++ Define `views` and `urls` and create a directory `templates` for static content
+
++ Update the `INSTALLED_APPS` of project settings
+
++ Run project (and all apps inside):
+
+  `python manage.py runserver`
