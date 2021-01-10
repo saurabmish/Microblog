@@ -85,7 +85,7 @@
 
   `python manage.py makemigrations`
 
-+ Create project's database (this will add default tables):
++ Create project's tables:
 
   `python manage.py migrate`
 
@@ -102,3 +102,36 @@
   `http://127.0.0.1:8000/admin/auth/user/`
 
 + Create a new user for this application (by specifying details like above)
+
+----
+
+# Verification
+
++ Execute a Python shell using Django:
+
+  `python manage.py shell`
+
++ Commands
+
+  ```
+  >>> # import users associated with the project
+  >>> from django.contrib.auth.models import User
+  >>>
+  >>> # return all users (objects are of type "QuerySet")
+  >>> User.objects.all()
+  >>>
+  >>> # get the first (or last) user
+  >>> User.objects.first()
+  >>>
+  >>> # filter users by field
+  >>> User.objects.filter(username='saurabh')
+  >>>
+  >>> # return filtered user of type User (not QuerySet)
+  >>> User.objects.filter(username='saurabh').first()
+  >>>
+  >>> # get a user's primary key (pk) (or identification (id))
+  >>> User.objects.filter(username='saurabh').first().pk
+  >>>
+  >>> # get a user having specific primary key (pk) (or identification (id))
+  >>> User.objects.get(id=1)
+  ```
