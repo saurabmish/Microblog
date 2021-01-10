@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/7d564f3664c8293aa157/maintainability)](https://codeclimate.com/github/saurabmish/Microblog/maintainability)
+
 # Microblog
 
 Full stack web development using Django framework
