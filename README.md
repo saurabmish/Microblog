@@ -22,13 +22,9 @@ Full stack web development using Django framework
 
   `pip install --upgrade pip`
 
-+ Install `django`:
++ Install dependencies:
 
-  `pip install django`
-
-+ Check `django` version:
-
-  `python -m django --version`
+  `pip install --requirement requirements.txt`
 
 + Create a new Django project:
 
@@ -38,7 +34,7 @@ Full stack web development using Django framework
 
   `cd microblog`
 
-+ Run django web server:
++ Run django web server (all applications that are a part of the project are executed:
 
   `python manage.py runserver`
 
