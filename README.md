@@ -6,9 +6,12 @@ Full stack web development using Django framework
 
 ## Setup
 
-### Project
++ Navigate to an empty directory and clone this repository
 
-+ Navigate to an empty directory
+  ```
+  git init
+  git clone https://github.com/saurabmish/Microblog.git
+  ```
 
 + Create a Python 3 virtual environment:
 
@@ -22,38 +25,21 @@ Full stack web development using Django framework
 
   `pip install --upgrade pip`
 
-+ Install dependencies:
++ Navigate to project's root directory and install all dependencies:
 
-  `pip install --requirement requirements.txt`
+  ```
+  cd Microblog
+  pip install --requirement requirements.txt
+  ```
 
-+ Create a new Django project:
+## Execution
 
-  `django-admin startproject microblog`
-
-+ Navigate to project's root:
-
-  `cd microblog`
-
-+ Run django web server (all applications that are a part of the project are executed:
++ Run django web server (all applications part of this project are executed:
 
   `python manage.py runserver`
 
-+ Go to the below URL on the browser to verify Django server:
++ Visit the below URL on the browser and check application functionality:
 
   `http://127.0.0.1:8000`
 
-+ Stop the web server `Ctrl+c`
-
-### Application
-
-+ Create application directory:
-
-  `python manage.py startapp app`
-
-+ Define `views` and `urls` and create a directory `templates` for static content
-
-+ Update the `INSTALLED_APPS` of project settings
-
-+ Run project (and all apps inside):
-
-  `python manage.py runserver`
++ Once done, stop the web server with `Ctrl+c`
