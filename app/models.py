@@ -1,3 +1,11 @@
+'''
++ See what tables will be created in the database:
+python manage.py makemigrations
+
++ Create table(s):
+python manage.py sqlmigrate APPLICATION_NAME MIGRATION_NUMBER
+'''
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
