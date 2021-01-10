@@ -81,7 +81,7 @@
   }
   ```
 
-+ View (dry run) if there any existing / default tables in the database:
++ View (dry run) if there are any existing tables in the database:
 
   `python manage.py makemigrations`
 
