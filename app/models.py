@@ -2,8 +2,11 @@
 + See what tables will be created in the database:
 python manage.py makemigrations
 
-+ Create table(s):
++ Stage changes (this will COMMIT):
 python manage.py sqlmigrate APPLICATION_NAME MIGRATION_NUMBER
+
++ Publish above changes:
+python manage.py migrate
 '''
 
 from django.db import models
