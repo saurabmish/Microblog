@@ -25,7 +25,7 @@ SECRET_KEY = 'pky0_%pznlf_v8!xlc!&4w7q%p1gqipsdp50hn&o7)y+=)nd%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['djangomicroblog.herokuapp.com']
 
 
 # Application definition
