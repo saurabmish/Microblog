@@ -1,8 +1,17 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/7d564f3664c8293aa157/maintainability)](https://codeclimate.com/github/saurabmish/Microblog/maintainability)
+[![saurabmish](https://circleci.com/gh/saurabmish/Microblog.svg?style=shield)](https://circleci.com/gh/saurabmish/Microblog)
 
 # Microblog
 
-Full stack web development using Django framework
+Full stack web application using Django framework.
+
+**Features**
+
++ User registration
++ Create, read, update, and delete posts
++ Session management (login & logout)
++ Django-native user interface
+
 
 Website is live [here][1]
 
