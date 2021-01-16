@@ -4,6 +4,8 @@
 
 Full stack web development using Django framework
 
+Website is live [here][1]
+
 ## Setup
 
 + Navigate to an empty directory and clone this repository
@@ -32,9 +34,13 @@ Full stack web development using Django framework
   pip install --requirement requirements.txt
   ```
 
-## Execution
+## Local Execution
 
-+ Run django web server (all applications part of this project are executed:
++ Start Postgres service:
+
+  `pg_ctl -D /usr/local/var/postgres start`
+
++ Run django web server (all applications part of this project are executed):
 
   `python manage.py runserver`
 
@@ -42,4 +48,10 @@ Full stack web development using Django framework
 
   `http://127.0.0.1:8000`
 
-+ Once done, stop the web server with `Ctrl+c`
++ Once done:
+
+    1. Stop the web server with `Ctrl+c`
+    2. stop Postgres with `pg_ctl -D /usr/local/var/postgres stop`
+
+
+[1]: https://djangomicroblog.herokuapp.com/
