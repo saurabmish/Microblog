@@ -43,7 +43,8 @@ jobs:
 
   deploy:
     machine:
-        enabled: true
+      enabled: true
+    working_directory: ~/microblog
     steps:
       - checkout
       - run:
