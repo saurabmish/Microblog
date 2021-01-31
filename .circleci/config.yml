@@ -16,6 +16,27 @@ jobs:
     working_directory: ~/microblog
     docker:
       - image: circleci/python:3.9.1      # primary container - build job steps are run
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install Project Dependencies
+          command: |
+            python3 -m venv django-project
+            source django-project/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "django-project"
+
+  test:
+    working_directory: ~/microblog
+    docker:
+      - image: circleci/python:3.9.1      # primary container - build job steps are run
         environment:
           DATABASE_URL: postgresql://postgres@localhost/microblogdb?sslmode=disable
 
@@ -38,26 +59,6 @@ jobs:
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
-          name: Install Project Dependencies
-          command: |
-            python3 -m venv django-project
-            source django-project/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
-      - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          paths:
-            - "django-project"
-
-  test:
-    docker:
-      - image: circleci/python:3.9.1
-    working_directory: ~/microblog
-    steps:
-      - checkout
-      - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run:
           name: Test Application
           command: |
             # Reactivate virtual environment
@@ -72,9 +73,8 @@ jobs:
             - "django-project"
 
   deploy:
-    docker:
-      - image: circleci/python:3.9.1
-      - image: circleci/postgres:13.1
+    machine:
+      enabled: true
     working_directory: ~/microblog
     steps:
       - checkout
