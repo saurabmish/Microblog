@@ -10,6 +10,7 @@ workflows:
           requires:
             - test
 
+
 version: 2
 jobs:
 
@@ -25,7 +26,7 @@ jobs:
       - run:
           name: Install Project Dependencies
           command: |
-            python3 -m venv django-project
+            python -m venv django-project
             source django-project/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
@@ -65,10 +66,20 @@ jobs:
             # Reactivate virtual environment
             source django-project/bin/activate
             # Testing does not run collectstatic by default and this app is using a storage class that requires it.
-            python3 manage.py collectstatic
+            python manage.py collectstatic
             # Run all tests with maximum verbosity
-            python3 manage.py test blog.tests --verbosity=3
-            python3 manage.py test user.tests --verbosity=3
+            python manage.py test blog.tests --verbosity=3
+            python manage.py test user.tests --verbosity=3
+            # Remove any coverage data from previous runs
+            coverage erase
+            # Generate coverage for all logical components
+            coverage run manage.py test
+            # Show coverage metrics on shell
+            coverage report -m
+            # Generate XML report
+            coverage xml
+            # Public report to codecov.io
+            bash <(curl -s https://codecov.io/bash) -f tests/coverage/coverage.xml
 
   deploy:
 
