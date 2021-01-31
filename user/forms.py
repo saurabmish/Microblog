@@ -10,9 +10,15 @@ class UserRegistrationForm(UserCreationForm):
     default
     """
     email = forms.EmailField(required=False, label='Email')
-    username = forms.CharField(max_length=50)
-    password1 = forms.CharField(widget=forms.PasswordInput(),
-                                label='Enter Password')
+    username = forms.CharField(
+                   max_length=50,
+                   label='Username',
+                   widget=forms.TextInput(attrs={'placeholder': 'Cannot have special characters like @, #, etc.'})
+                )
+    password1 = forms.CharField(
+                    label='Enter Password',
+                    widget=forms.PasswordInput(attrs={'placeholder': 'Must be alphanumeric and 8 characters long'})
+                )
     password2 = forms.CharField(widget=forms.PasswordInput(),
                                 label='Confirm Password')
 
