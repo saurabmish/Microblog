@@ -1,14 +1,61 @@
-version: 2.1
-
-orbs:
-  heroku: circleci/heroku@1.2.4
-
 workflows:
-  heroku_deploy:
+  version: 2
+  build-and-deploy:
     jobs:
-      # Job supplied by this orb.
-      - heroku/deploy-via-git:
-          post-steps:
-            - run: echo "post deployment steps like database migration"
-          pre-steps:
-            - run: echo "pre deployment steps, i.e., commands to run before deploying"
+      - build
+      - deploy:
+          requires:
+            - build
+
+version: 2
+jobs:
+  build:
+    working_directory: ~/microblog
+    docker:
+      - image: circleci/python:3.9.1      # primary container - where job steps are run
+        environment:
+          DATABASE_URL: postgresql://microblog_admin@localhost/microblogdb?sslmode=disable
+
+      - image: circleci/postgres:13.1     # services container
+        environment:
+          POSTGRES_DB: microblogdb
+          POSTGRES_USER: microblog_admin
+          POSTGRES_PASSWORD: "admin123"
+
+    steps:                                # build job
+        # check out source code to working directory
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv django-project
+            source django-project/bin/activate
+            pip install -r requirements.txt
+            pg_ctl -D /usr/local/var/postgres status
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "django-project"
+
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/circleci-demo-workflows
+    environment:
+      HEROKU_APP: "djangomicroblog" # define env var $HEROKU_APP
+      HEROKU_API_KEY: "e846fda7-dac1-4b21-b639-e90228d07326"
+    steps:
+      - checkout
+      - run:
+          name:
+
+      - run:
+          name: Setup Heroku and Deploy Master
+          command: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+            git push heroku master
+            heroku run python manage.py migrate
+            sleep 10
+            heroku restart
