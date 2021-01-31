@@ -50,6 +50,7 @@ jobs:
             source django-project/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
+            echo "source /home/circleci/microblog/django-project/bin/activate" >> $BASH_ENV
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
@@ -65,7 +66,8 @@ jobs:
           name: Test Application
           command: |
             # Reactivate virtual environment
-            source django-project/bin/activate
+            # source django-project/bin/activate
+            source /home/circleci/microblog/django-project/bin/activate
             # Testing does not run collectstatic by default and this app is using a storage class that requires it.
             python3 manage.py collectstatic
             # Run all tests in the blog.tests module with maximum verbosity
