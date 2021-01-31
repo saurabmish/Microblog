@@ -35,7 +35,6 @@ jobs:
             python3 -m venv django-project
             source django-project/bin/activate
             pip install --upgrade pip
-            pip install wheel
             pip install -r requirements.txt
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
@@ -43,17 +42,11 @@ jobs:
             - "django-project"
 
   deploy:
-    machine:
-        enabled: true
-    working_directory: ~/microblog
-    environment:
-      HEROKU_APP: "djangomicroblog"
-      HEROKU_API_KEY: "e846fda7-dac1-4b21-b639-e90228d07326"
     steps:
       - checkout
       - run:
           name: Setup Heroku and Deploy Master
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             heroku run python manage.py migrate
