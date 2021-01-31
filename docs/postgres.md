@@ -81,6 +81,12 @@
   }
   ```
 
++ To be able to run test cases, the user must have permission to create a database
+
+  `$ psql -U postgres -h localhost`
+
+  `postgres=# ALTER USER microblog_admin CREATEDB;`
+
 + View (dry run) if there are any existing tables in the database:
 
   `python manage.py makemigrations`
