@@ -20,7 +20,6 @@ jobs:
           DATABASE_URL: postgresql://postgres@localhost/microblogdb?sslmode=disable
 
       - image: circleci/postgres:13.1     # services container
-      #- image: nimbustech/postgres-ssl:9.5
         environment:
           POSTGRES_DB: microblogdb
           POSTGRES_USER: postgres
