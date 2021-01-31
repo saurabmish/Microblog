@@ -137,6 +137,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# Django redirections
+LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_URL = 'login'
+
 # django-heroku automatically configures DB url and connecting static assets to gunicorn
 django_heroku.settings(locals())
 
