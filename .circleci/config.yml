@@ -30,7 +30,7 @@ jobs:
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
-          name: Install dependencies
+          name: Install Project Dependencies
           command: |
             python3 -m venv django-project
             source django-project/bin/activate
@@ -40,6 +40,13 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "django-project"
+      - run:
+          name: Test Application
+          command: |
+            # Testing does not run collectstatic by default and this app is using a storage class that requires it.
+            python3 manage.py collectstatic
+            # Run all tests in the blog.tests module with maximum verbosity
+            python3 manage.py test blog.tests -verbosity=3
 
   deploy:
     machine:
