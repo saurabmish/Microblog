@@ -12,11 +12,12 @@ workflows:
 
 version: 2
 jobs:
+
   build:
+
     working_directory: ~/microblog
     docker:
       - image: circleci/python:3.9.1      # primary container - build job steps are run
-
     steps:
       - checkout
       - restore_cache:
@@ -34,13 +35,14 @@ jobs:
             - "django-project"
 
   test:
+
     working_directory: ~/microblog
     docker:
-      - image: circleci/python:3.9.1      # primary container - build job steps are run
+      - image: circleci/python:3.9.1
         environment:
           DATABASE_URL: postgresql://postgres@localhost/microblogdb?sslmode=disable
 
-      - image: circleci/postgres:13.1     # services container
+      - image: circleci/postgres:13.1     # services container - needed to run primary container
         environment:
           POSTGRES_DB: microblogdb
           POSTGRES_USER: postgres
@@ -53,7 +55,6 @@ jobs:
             chmod 600 /server.key &&
             exec /docker-entrypoint.sh -c ssl=on -c ssl_cert_file=/server.crt -c ssl_key_file=/server.key
           '
-
     steps:
       - checkout
       - restore_cache:
@@ -67,15 +68,12 @@ jobs:
             python3 manage.py collectstatic
             # Run all tests in the blog.tests module with maximum verbosity
             python3 manage.py test blog.tests --verbosity=3
-      - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          paths:
-            - "django-project"
 
   deploy:
+
+    working_directory: ~/microblog
     machine:
       enabled: true
-    working_directory: ~/microblog
     steps:
       - checkout
       - run:
