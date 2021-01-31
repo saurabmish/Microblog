@@ -8,14 +8,14 @@ workflows:
             - build
           filters:
              branches:
-               only: master # only run deploy-via-git job on master branch
+               only: master
 
 version: 2
 jobs:
   build:
     working_directory: ~/microblog
     docker:
-      - image: circleci/python:3.9.1      # primary container - where job steps are run
+      - image: circleci/python:3.9.1      # primary container - build job steps are run
         environment:
           DATABASE_URL: postgresql://microblog_admin@localhost/microblogdb?sslmode=disable
 
@@ -25,8 +25,7 @@ jobs:
           POSTGRES_USER: microblog_admin
           POSTGRES_PASSWORD: "admin123"
 
-    steps:                                # build job
-        # check out source code to working directory
+    steps:
       - checkout
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
@@ -46,18 +45,18 @@ jobs:
   deploy:
     machine:
         enabled: true
-    working_directory: ~/circleci-demo-workflows
+    working_directory: ~/microblog
     environment:
-      HEROKU_APP: "djangomicroblog" # define env var $HEROKU_APP
+      HEROKU_APP: "djangomicroblog"
       HEROKU_API_KEY: "e846fda7-dac1-4b21-b639-e90228d07326"
     steps:
       - checkout
       - run:
           name: Setup Heroku and Deploy Master
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
-            # curl https://cli-assets.heroku.com/install.sh | sh
-            # git push heroku master
-            # heroku run python manage.py migrate
+            curl https://cli-assets.heroku.com/install.sh | sh
+            # git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            git push heroku master
+            heroku run python manage.py migrate
             # sleep 10
             # heroku restart
