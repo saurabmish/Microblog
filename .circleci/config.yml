@@ -19,12 +19,21 @@ jobs:
         environment:
           DATABASE_URL: postgresql://microblog_admin@localhost/microblogdb?sslmode=disable
 
-      #- image: circleci/postgres:13.1     # services container
-      - image: nimbustech/postgres-ssl:9.5
+      - image: circleci/postgres:13.1     # services container
+      #- image: nimbustech/postgres-ssl:9.5
         environment:
           POSTGRES_DB: microblogdb
           POSTGRES_USER: microblog_admin
           POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+        entrypoint: bash
+        command: >
+          -c '
+            openssl req -nodes -new -x509 -subj "/CN=localhost" -keyout server.key -out server.crt &&
+            chown postgres server.key &&
+            chmod 600 /server.key &&
+            exec /docker-entrypoint.sh -c ssl=on -c ssl_cert_file=/server.crt -c ssl_key_file=/server.key
+          '
+
 
     steps:
       - checkout
