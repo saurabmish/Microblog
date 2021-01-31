@@ -66,8 +66,9 @@ jobs:
             source django-project/bin/activate
             # Testing does not run collectstatic by default and this app is using a storage class that requires it.
             python3 manage.py collectstatic
-            # Run all tests in the blog.tests module with maximum verbosity
+            # Run all tests with maximum verbosity
             python3 manage.py test blog.tests --verbosity=3
+            python3 manage.py test user.tests --verbosity=3
 
   deploy:
 
