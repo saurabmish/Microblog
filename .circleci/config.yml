@@ -28,6 +28,7 @@ jobs:
         entrypoint: bash
         command: >
           -c '
+            createuser -s postgres
             openssl req -nodes -new -x509 -subj "/CN=localhost" -keyout server.key -out server.crt &&
             chown postgres server.key &&
             chmod 600 /server.key &&
