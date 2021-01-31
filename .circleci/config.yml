@@ -6,6 +6,9 @@ workflows:
       - deploy:
           requires:
             - build
+          filters:
+             branches:
+               only: master # only run deploy-via-git job on master branch
 
 version: 2
 jobs:
@@ -49,9 +52,6 @@ jobs:
       HEROKU_API_KEY: "e846fda7-dac1-4b21-b639-e90228d07326"
     steps:
       - checkout
-      - run:
-          name:
-
       - run:
           name: Setup Heroku and Deploy Master
           command: |
