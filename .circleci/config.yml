@@ -42,6 +42,8 @@ jobs:
             - "django-project"
 
   deploy:
+    machine:
+        enabled: true
     steps:
       - checkout
       - run:
