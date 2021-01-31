@@ -56,8 +56,8 @@ jobs:
             - "django-project"
 
   test:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/python:3.9.1
     working_directory: ~/microblog
     steps:
       - checkout
