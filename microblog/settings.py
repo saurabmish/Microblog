@@ -33,8 +33,8 @@ ALLOWED_HOSTS = ['djangomicroblog.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'app.apps.AppConfig',
-    'users.apps.UsersConfig',
+    'blog.apps.AppConfig',
+    'user.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
