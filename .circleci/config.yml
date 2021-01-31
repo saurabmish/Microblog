@@ -6,15 +6,10 @@ workflows:
       - test:
           requires:
             - build
-          filters:
-             branches:
-               only: master
       - deploy:
           requires:
+            - build
             - test
-          filters:
-             branches:
-               only: master
 
 version: 2
 jobs:
@@ -68,11 +63,14 @@ jobs:
           command: |
             # Reactivate virtual environment
             source django-project/bin/activate
-            source /home/circleci/microblog/django-project/bin/activate
             # Testing does not run collectstatic by default and this app is using a storage class that requires it.
             python3 manage.py collectstatic
             # Run all tests in the blog.tests module with maximum verbosity
             python3 manage.py test blog.tests --verbosity=3
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "django-project"
 
   deploy:
     machine:
