@@ -17,13 +17,13 @@ jobs:
     docker:
       - image: circleci/python:3.9.1      # primary container - build job steps are run
         environment:
-          DATABASE_URL: postgresql://postgres@localhost/microblogdb?sslmode=disable
+          DATABASE_URL: postgresql://microblog_admin@localhost/microblogdb?sslmode=disable
 
       - image: circleci/postgres:13.1     # services container
       #- image: nimbustech/postgres-ssl:9.5
         environment:
           POSTGRES_DB: microblogdb
-          POSTGRES_USER: postgres
+          POSTGRES_USER: microblog_admin
           POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         entrypoint: bash
         command: >
