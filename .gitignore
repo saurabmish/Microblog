@@ -1,2 +1,6 @@
 *__pycache__/
 *.DS_Store
+
+# Ignore raw coverage data and HTML report
+tests/coverage/.coverage
+tests/coverage/html_report/*
