@@ -21,4 +21,4 @@ class Post(models.Model):
     published = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return f"{self.author} {self.title} {self.content}"
