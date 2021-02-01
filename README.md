@@ -1,5 +1,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/7d564f3664c8293aa157/maintainability)](https://codeclimate.com/github/saurabmish/Microblog/maintainability)
 [![saurabmish](https://circleci.com/gh/saurabmish/Microblog.svg?style=shield)](https://circleci.com/gh/saurabmish/Microblog)
+[![codecov](https://codecov.io/gh/saurabmish/Microblog/branch/master/graph/badge.svg?token=FKAV2ZWL2F)](https://codecov.io/gh/saurabmish/Microblog)
 
 # Microblog
 
