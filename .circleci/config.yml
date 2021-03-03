@@ -65,6 +65,9 @@ jobs:
           command: |
             # Reactivate virtual environment
             source django-project/bin/activate
+            # Run migrations
+            python manage.py makemigrations
+            python manage.py migrate
             # Testing does not run collectstatic by default and this app is using a storage class that requires it.
             python manage.py collectstatic
             # Run tests for each logical component with maximum verbosity
