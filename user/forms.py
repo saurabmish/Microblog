@@ -9,7 +9,7 @@ class UserRegistrationForm(UserCreationForm):
     exist in Meta AND outside Meta (UserRegistrationForm) are required by
     default
     """
-    email = forms.EmailField(required=False, label='Email')
+    email = forms.EmailField(required=True, label='Email')
     username = forms.CharField(
                    max_length=50,
                    label='Username',
