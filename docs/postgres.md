@@ -48,13 +48,17 @@
 
   `\du`
 
-+ Verify database (this will give details like owner, privileges, etc.)
++ Verify database (this will give details like owner, privileges, etc.):
 
   `\l`
 
++ Connect to *new* database with *new* user:
+
+  `\c microblogdb microblog_admin`
+
 + Exit psql:
 
-  \q
+  `\q`
 
 + Check the listen addresses and port in postgresql.conf:
 
